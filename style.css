@@ -42,10 +42,15 @@ h3 {
     display: block;
 
 }
-
-.container2 {
-    background-color: cadetblue;
+#searchBar {
+    margin:auto;
+    max-width:300px;
 }
 #textBox {
     margin: 10px;
+}
+.blogbox{
+    background-color: cadetblue;
+    margin:10px;
+    padding: 10px;
 }
