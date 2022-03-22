@@ -5,14 +5,34 @@
       "value": "This is a post.",
       "noLikes": 0,
       "noDislikes": 0,
-      "noEmojis": 0
+      "noEmojis": 0,
+      "comments": [
+        {
+          "id": 1,
+          "comment": "This is cool"
+        }
+      ]
     },
     {
       "id": 2,
       "value": "This is another post",
       "noLikes": 0,
       "noDislikes": 0,
-      "noEmojis": 0
+      "noEmojis": 0,
+      "comments": [
+        {
+          "id": 1,
+          "comment": "This is cool"
+        },
+        {
+          "id": 2,
+          "comment": null
+        },
+        {
+          "id": 3,
+          "comment": null
+        }
+      ]
     }
   ]
 }

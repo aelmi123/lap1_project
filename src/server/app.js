@@ -40,6 +40,29 @@ app.post('/post', async (req, res) => {
     })
 })
 
+app.post('/comment', async (req, res) => {
+    const newCom = req.body;
+    fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            const postsData = JSON.parse(data)
+            postsData.posts[postsData.posts.length -1].comments.push({id: newCom.id, comment: newCom.comment})
+            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                if (err){
+                    console.log(err)
+                }
+                else {
+                    console.log('success')
+                }
+
+            })
+        }
+    })
+
+})
+
 app.get('/posts', (req,res)=> {
     fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
         if(err) {
