@@ -48,7 +48,7 @@ app.post('/comment', async (req, res) => {
         }
         else {
             const postsData = JSON.parse(data)
-            postsData.posts[postsData.posts.length -1].comments.push({id: newCom.id, comment: newCom.comment})
+            postsData.posts[newCom.postId -1].comments.push({id: newCom.id, comment: newCom.comment})
             fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
                 if (err){
                     console.log(err)

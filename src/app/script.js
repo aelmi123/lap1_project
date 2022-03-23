@@ -122,7 +122,7 @@ addEventListener('load', async (e) => {
 })
     
 const sendComment = document.getElementById('sendComment')
-
+const commentBox = document.getElementById('commentsBox')
     
 sendComment.addEventListener('click', async(e)=> {
     
@@ -130,16 +130,16 @@ sendComment.addEventListener('click', async(e)=> {
     let data = await resp.json()
     for (i = 0; i < data.length; i++) {
         if (postText.textContent === data[i].value){
-            const commentBox = document.getElementById('commentsBox')
+            let postId = data[i].id
             let newId = data[i].comments.length +1
             posts[i].comments.push({id: newId, comment: commentBox})
             const response = await fetch('http://localhost:8080/comment',
             {
                 headers: {'Content-Type': 'application/json'},
                 method: "POST",
-                body: JSON.stringify({ id: newId, comment: commentBox})
+                body: JSON.stringify({ postId: postId, id: newId, comment: commentBox})
             });
-            break
+            console.log(response)
         }
     }
        
