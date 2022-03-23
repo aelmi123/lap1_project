@@ -29,12 +29,12 @@
                 <div class="blogbox rounded">
                     <h4>Latest Post</h4>
                     <p id="postText"></p>
+
                     <h6>Comments:</h6>
                     <ul id="commentList"></ul>
                     <form>
                         <input type="text" id="commentsBox" placeholder="Leave a comment" maxlength="200" style="height: 50px;" size="50">
-                        <input type="submit" id="sendComment" value="Send">
-                        <input type="button" id="gif" value="GIF">
+                        <input type="submit" id="sendComment" value="Comment">
                         <div class="row">
                             <div class="col-sm-1">
                                 <input type="button" id="thumbsUp" value="&#128077">
@@ -57,7 +57,12 @@
                             </div>
                     </div>
                     </form>
+                    <img id="gifImage" alt="">
+                    <input type="text" id="gif">
+                    <button onclick="sendApiRequest()">GIF</button>
                 </div>
+                
+
             </div>
             <div class="col-sm-4 container1">
                 <div class="p-3 m-3">
@@ -77,10 +82,6 @@
                 </div>
             </div>
         </div>
-
-        
-        
-
     </main>
 </body>
 </html>

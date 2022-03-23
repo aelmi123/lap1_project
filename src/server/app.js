@@ -60,6 +60,28 @@ app.post('/comment', async (req, res) => {
             })
         }
     })
+})
+
+app.post('/emoji', async (req, res) => {
+    const newEmoji = req.body;
+    fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            const postsData = JSON.parse(data)
+            postsData.posts[newEmoji.postId -1].noLikes = newEmoji.noLikes
+            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                if (err){
+                    console.log(err)
+                }
+                else {
+                    console.log('success')
+                }
+
+            })
+        }
+    })
 
 })
 

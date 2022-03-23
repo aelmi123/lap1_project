@@ -16,13 +16,17 @@
     {
       "id": 2,
       "value": "This is another post",
-      "noLikes": 0,
+      "noLikes": 1,
       "noDislikes": 0,
       "noEmojis": 0,
       "comments": [
         {
           "id": 1,
           "comment": "This is cool"
+        },
+        {
+          "id": 2,
+          "comment": "yay"
         }
       ]
     }

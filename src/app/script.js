@@ -13,52 +13,52 @@ const commentBox = document.getElementById('commentsBox');
 
 const posts = [];
 
-// let countLaughFace = 0
-// let countThumbDown = 0
-// let countThumbUp = 0
+let countLaughFace = 0
+let countThumbDown = 0
+let countThumbUp = 0
 
-// // get postText input field and update value
-// thumbUp.addEventListener('click', clickUp);
+// get postText input field and update value
+thumbUp.addEventListener('click', clickUp);
 
-// var clickCountUp=0;
-// function clickUp(event){
-//     clickCountUp ++;
-//     if(clickCountUp % 2 != 0){
-//         countThumbUp ++;
-//     }
-//     else {
-//         countThumbUp --;
-//      }  numThumbUp.textContent = countThumbUp;
-// }
-
-
-
-// thumbDown.addEventListener('click', clickDown);
-
-// var clickCountDown=0;
-// function clickDown(event){
-//     clickCountDown ++;
-//     if(clickCountDown % 2 != 0){
-//         countThumbDown ++;
-//     }
-//     else {
-//         countThumbDown --;
-//      }  numThumbDown.textContent = countThumbDown;
-// }
+var clickCountUp=0;
+function clickUp(event){
+    clickCountUp ++;
+    if(clickCountUp % 2 != 0){
+        countThumbUp ++;
+    }
+    else {
+        countThumbUp --;
+     }  numThumbUp.textContent = countThumbUp;
+}
 
 
-// laughFace.addEventListener('click', clickLaugh);
 
-// var clickCountLaugh=0;
-// function clickLaugh(event){
-//     clickCountLaugh ++;
-//     if(clickCountLaugh % 2 != 0){
-//         countLaughFace ++;
-//     }
-//     else {
-//         countLaughFace --;
-//      }  numLaughFace.textContent = countLaughFace;
-// }
+thumbDown.addEventListener('click', clickDown);
+
+var clickCountDown=0;
+function clickDown(event){
+    clickCountDown ++;
+    if(clickCountDown % 2 != 0){
+        countThumbDown ++;
+    }
+    else {
+        countThumbDown --;
+     }  numThumbDown.textContent = countThumbDown;
+}
+
+
+laughFace.addEventListener('click', clickLaugh);
+
+var clickCountLaugh=0;
+function clickLaugh(event){
+    clickCountLaugh ++;
+    if(clickCountLaugh % 2 != 0){
+        countLaughFace ++;
+    }
+    else {
+        countLaughFace --;
+     }  numLaughFace.textContent = countLaughFace;
+}
 
 
 
@@ -139,6 +139,19 @@ sendComment.addEventListener('click', async(e)=> {
     });
 });
     
+thumbUp.addEventListener('click', async(e)=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    posts[postId - 1].noLikes = parseInt(numThumbUp.textContent);
+    const response = await fetch('http://localhost:8080/emoji',
+    {
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ postId: postId, noLikes: parseInt(numThumbUp.textContent)})
+    });
+});
+
 share.addEventListener('click', async (e) => {
     const newId = posts.length + 1;
     posts.push({ id: newId, value: postBox.value })
@@ -150,6 +163,25 @@ share.addEventListener('click', async (e) => {
         });
 })
  
+function sendApiRequest() {
+    let userInput = document.getElementById("gif").value
+    console.log(userInput)
 
+    const giphyApiKey = "4qsIN2L7YbHr9wkQfLXylyEPXoG0Z6nZ"
+    const giphyApiURL = `http://api.giphy.com/v1/gifs/search?q=${userInput}&rating=g&api_key=${giphyApiKey}`
+
+    fetch(giphyApiURL).then(function(data) {
+        return data.json()
+    })
+    .then(function(json){
+        const index = Math.floor(Math.random() * json.data.length)
+        console.log(json.data[index].images.fixed_height.url)
+        let imgPath = json.data[index].images.fixed_height.url
+        let gifImage=document.querySelector("#gifImage")
+        // let img = document.createElement("img")
+        gifImage.setAttribute("src", imgPath)
+        // document.body.appendChild(img)
+    })
+}
 
  
