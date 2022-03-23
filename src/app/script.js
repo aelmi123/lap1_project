@@ -1,6 +1,6 @@
 const thumbUp = document.getElementById('thumbsUp');
 const numThumbUp = document.getElementById('countThumbUp');
-const postBox = document.getElementById('postBox');
+const postBox = document.getElementById('post-Box');
 const share = document.getElementById('share');
 const postText = document.getElementById('postText');
 const gif = document.getElementById('gif');
@@ -12,55 +12,6 @@ const sendComment = document.getElementById('sendComment');
 const commentBox = document.getElementById('commentsBox');
 
 const posts = [];
-
-let countLaughFace = 0
-let countThumbDown = 0
-let countThumbUp = 0
-
-// get postText input field and update value
-thumbUp.addEventListener('click', clickUp);
-
-var clickCountUp=0;
-function clickUp(event){
-    clickCountUp ++;
-    if(clickCountUp % 2 != 0){
-        countThumbUp ++;
-    }
-    else {
-        countThumbUp --;
-     }  numThumbUp.textContent = countThumbUp;
-}
-
-
-
-thumbDown.addEventListener('click', clickDown);
-
-var clickCountDown=0;
-function clickDown(event){
-    clickCountDown ++;
-    if(clickCountDown % 2 != 0){
-        countThumbDown ++;
-    }
-    else {
-        countThumbDown --;
-     }  numThumbDown.textContent = countThumbDown;
-}
-
-
-laughFace.addEventListener('click', clickLaugh);
-
-var clickCountLaugh=0;
-function clickLaugh(event){
-    clickCountLaugh ++;
-    if(clickCountLaugh % 2 != 0){
-        countLaughFace ++;
-    }
-    else {
-        countLaughFace --;
-     }  numLaughFace.textContent = countLaughFace;
-}
-
-
 
 
 // Load Posts
@@ -138,17 +89,107 @@ sendComment.addEventListener('click', async(e)=> {
         body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
     });
 });
-    
-thumbUp.addEventListener('click', async(e)=> {
+
+thumbUp.addEventListener('click', async()=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    let countThumbUp = posts[postId - 1].noLikes
+    clickUp(countThumbUp)
+});
+
+let clickCountUp=0;
+function clickUp(countThumbUp){
+    clickCountUp ++;
+    if(clickCountUp % 2 !== 0){
+        countThumbUp++
+    }
+    else {
+        countThumbUp--
+     }  numThumbUp.textContent = countThumbUp;
+}
+
+let countLaughFace = 0
+
+thumbDown.addEventListener('click', async()=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    let countThumbDown = posts[postId - 1].noDislikes
+    clickDown(countThumbDown)
+});
+
+let clickCountDown=0;
+function clickDown(countThumbDown){
+    clickCountDown ++;
+    if(clickCountDown % 2 != 0){
+        countThumbDown ++;
+    }
+    else {
+        countThumbDown --;
+     }  numThumbDown.textContent = countThumbDown;
+}
+
+
+laughFace.addEventListener('click', async()=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    let countLaughFace = posts[postId - 1].noEmojis
+    clickLaugh(countLaughFace)
+});
+
+let clickCountLaugh=0;
+function clickLaugh(countLaughFace){
+    clickCountLaugh ++;
+    if(clickCountLaugh % 2 != 0){
+        countLaughFace ++;
+    }
+    else {
+        countLaughFace --;
+     }  numLaughFace.textContent = countLaughFace;
+}
+
+thumbUp.addEventListener('mouseleave', async(e)=> {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json();
     let postId = data.find(post => postText.textContent === post.value).id;
     posts[postId - 1].noLikes = parseInt(numThumbUp.textContent);
+    posts[postId - 1].noDislikes = parseInt(numThumbDown.textContent);
+    posts[postId - 1].noEmojis = parseInt(numLaughFace.textContent);
     const response = await fetch('http://localhost:8080/emoji',
     {
         headers: {'Content-Type': 'application/json'},
         method: "POST",
-        body: JSON.stringify({ postId: postId, noLikes: parseInt(numThumbUp.textContent)})
+        body: JSON.stringify({ postId: postId, noLikes: parseInt(numThumbUp.textContent), noDislikes: parseInt(numThumbDown.textContent), noEmojis: parseInt(numLaughFace.textContent)})
+    });
+});
+thumbDown.addEventListener('mouseleave', async(e)=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    posts[postId - 1].noLikes = parseInt(numThumbUp.textContent);
+    posts[postId - 1].noDislikes = parseInt(numThumbDown.textContent);
+    posts[postId - 1].noEmojis = parseInt(numLaughFace.textContent);
+    const response = await fetch('http://localhost:8080/emoji',
+    {
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ postId: postId, noLikes: parseInt(numThumbUp.textContent), noDislikes: parseInt(numThumbDown.textContent), noEmojis: parseInt(numLaughFace.textContent)})
+    });
+});
+laughFace.addEventListener('mouseleave', async(e)=> {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    posts[postId - 1].noLikes = parseInt(numThumbUp.textContent);
+    posts[postId - 1].noDislikes = parseInt(numThumbDown.textContent);
+    posts[postId - 1].noEmojis = parseInt(numLaughFace.textContent);
+    const response = await fetch('http://localhost:8080/emoji',
+    {
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ postId: postId, noLikes: parseInt(numThumbUp.textContent), noDislikes: parseInt(numThumbDown.textContent), noEmojis: parseInt(numLaughFace.textContent)})
     });
 });
 
@@ -163,6 +204,15 @@ share.addEventListener('click', async (e) => {
         });
 })
  
+const characterCount = document.querySelector('#post-Box');
+characterCount.addEventListener('keyup', charCount)
+function charCount(e){
+    if(e.key){
+        document.querySelector('#current').textContent=document.querySelector('#post-Box').value.length
+
+    }
+}
+
 function sendApiRequest() {
     let userInput = document.getElementById("gif").value
     console.log(userInput)

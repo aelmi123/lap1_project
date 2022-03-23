@@ -16,9 +16,9 @@
     {
       "id": 2,
       "value": "This is another post",
-      "noLikes": 1,
-      "noDislikes": 0,
-      "noEmojis": 0,
+      "noLikes": 2,
+      "noDislikes": 3,
+      "noEmojis": 3,
       "comments": [
         {
           "id": 1,

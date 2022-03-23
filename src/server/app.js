@@ -71,6 +71,8 @@ app.post('/emoji', async (req, res) => {
         else {
             const postsData = JSON.parse(data)
             postsData.posts[newEmoji.postId -1].noLikes = newEmoji.noLikes
+            postsData.posts[newEmoji.postId -1].noDislikes = newEmoji.noDislikes
+            postsData.posts[newEmoji.postId -1].noEmojis = newEmoji.noEmojis
             fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
                 if (err){
                     console.log(err)

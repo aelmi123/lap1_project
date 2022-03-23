@@ -21,21 +21,27 @@
                 <div class="blogbox rounded">
                     <form id="postBlog">
                         <h4>Post:</h4>
-                        <input type="text" id="postBox" placeholder="Post your Blog....... max characters: 500" maxlength="500" style="height: 200px;" size="110">
+                        <label for="post-Box" >Post:</label>
+                        <textarea id ="post-Box" name="postbox" cols="30" rows="10" placeholder="Post your Blog....... max characters: 500" class="form-control" required maxlength="500"></textarea>
+                        <div>
+                            <span id="current">0</span>
+                            <span>/ 500</span>
+                        </div>
+                        <div id="charNum"></div>
                         <input type="submit" id="share" value="Share Now">
                         <input type="button" id="save" value="Save As">
                     </form>
                 </div>
-                <div class="blogbox rounded">
+                <div  class="blogbox rounded">
                     <h4>Latest Post</h4>
                     <p id="postText"></p>
 
                     <h6>Comments:</h6>
                     <ul id="commentList"></ul>
-                    <form>
+                    <form >
                         <input type="text" id="commentsBox" placeholder="Leave a comment" maxlength="200" style="height: 50px;" size="50">
                         <input type="submit" id="sendComment" value="Comment">
-                        <div class="row">
+                        <div id="commentForm" class="row">
                             <div class="col-sm-1">
                                 <input type="button" id="thumbsUp" value="&#128077">
                             </div>

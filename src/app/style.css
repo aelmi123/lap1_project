@@ -49,3 +49,19 @@ h3 {
     border-radius: 15px 50px;
     padding: 20px;
 }
+#countThumbUp{
+    position: relative;
+    left: -30px;
+    
+}
+
+#countThumbDown{
+    position: relative;
+    left: -30px;
+    
+}
+
+#countLaughFace{
+    position: relative;
+    left: -30px;
+}
