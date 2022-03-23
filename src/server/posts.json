@@ -28,15 +28,22 @@
         {
           "id": 2,
           "comment": "yay"
-        },
-        {
-          "id": 3,
-          "comment": "help"
         }
       ],
       "gifs": [
-        "https://media1.giphy.com/media/10UeedrT5MIfPG/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g"
+        "https://media1.giphy.com/media/10UeedrT5MIfPG/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g",
+        "https://media4.giphy.com/media/J3kNxYOj8mb7O/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g",
+        "https://media3.giphy.com/media/xhvv985KTwsrm/200.gif?cid=74aacfda7pp8nqvwjvc0c6naeg5fw93c1z2qpk3iriqzsej3&rid=200.gif&ct=g"
       ]
+    },
+    {
+      "id": 3,
+      "value": "This is a new post",
+      "noLikes": 0,
+      "noDislikes": 0,
+      "noEmojis": -1,
+      "comments": [],
+      "gifs": []
     }
   ]
 }

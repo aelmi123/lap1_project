@@ -23,19 +23,24 @@ app.post('/post', async (req, res) => {
             console.log(err)
         }
         else {
-            const postsData = JSON.parse(data)
-            console.log('server:', postsData)
-            postsData.posts.push(new Post(newPost.id, newPost.value))
-            console.log('new posts: ', postsData )
-            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
-                if (err){
-                    console.log(err)
-                }
-                else {
-                    console.log('success')
-                }
-
-            })
+            try {
+                const postsData = JSON.parse(data)
+                console.log('server:', postsData)
+                postsData.posts.push(new Post(newPost.id, newPost.value))
+                console.log('new posts: ', postsData )
+                fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        console.log('success')
+                    }
+    
+                })
+            }
+            catch(err) {
+                console.log(err)
+            }
         }
     })
 })
@@ -47,17 +52,22 @@ app.post('/comment', async (req, res) => {
             console.log(err)
         }
         else {
-            const postsData = JSON.parse(data)
-            postsData.posts[newCom.postId -1].comments.push({id: newCom.id, comment: newCom.comment})
-            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
-                if (err){
-                    console.log(err)
-                }
-                else {
-                    console.log('success')
-                }
-
-            })
+            try {
+                const postsData = JSON.parse(data)
+                postsData.posts[newCom.postId -1].comments.push({id: newCom.id, comment: newCom.comment})
+                fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        console.log('success')
+                    }
+    
+                })
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     })
 })
@@ -69,19 +79,24 @@ app.post('/emoji', async (req, res) => {
             console.log(err)
         }
         else {
-            const postsData = JSON.parse(data)
-            postsData.posts[newEmoji.postId -1].noLikes = newEmoji.noLikes
-            postsData.posts[newEmoji.postId -1].noDislikes = newEmoji.noDislikes
-            postsData.posts[newEmoji.postId -1].noEmojis = newEmoji.noEmojis
-            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
-                if (err){
-                    console.log(err)
-                }
-                else {
-                    console.log('success')
-                }
-
-            })
+            try {
+                const postsData = JSON.parse(data)
+                postsData.posts[newEmoji.postId -1].noLikes = newEmoji.noLikes
+                postsData.posts[newEmoji.postId -1].noDislikes = newEmoji.noDislikes
+                postsData.posts[newEmoji.postId -1].noEmojis = newEmoji.noEmojis
+                fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        console.log('success')
+                    }
+    
+                })
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     })
 
@@ -94,17 +109,22 @@ app.post('/gifs', async (req, res) => {
             console.log(err)
         }
         else {
-            const postsData = JSON.parse(data)
-            postsData.posts[newGif.postId -1].gifs.push(newGif.newGiffy)
-            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
-                if (err){
-                    console.log(err)
-                }
-                else {
-                    console.log('success')
-                }
-
-            })
+            try {
+                const postsData = JSON.parse(data)
+                postsData.posts[newGif.postId -1].gifs.push(newGif.newGiffy)
+                fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                    if (err){
+                        console.log(err)
+                    }
+                    else {
+                        console.log('success')
+                    }
+    
+                })
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     })
 })
@@ -115,8 +135,13 @@ app.get('/posts', (req,res)=> {
             console.log(err)
         }
         else {
-            const obj = JSON.parse(data)
-            res.send(obj.posts)
+            try {
+                const obj = JSON.parse(data)
+                res.send(obj.posts)
+            }
+            catch (err) {
+                console.log(err)
+            }
         }
     })
 })

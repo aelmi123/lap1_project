@@ -10,7 +10,8 @@ const thumbDown = document.getElementById('thumbsDown');
 const numThumbDown = document.getElementById('countThumbDown');
 const sendComment = document.getElementById('sendComment');
 const commentBox = document.getElementById('commentsBox');
-const gifImage = document.getElementById("gifImage")
+const gifImage = document.getElementById("gifImage");
+const sidePanel = document.getElementById("sidePanel")
 
 const posts = [];
 
@@ -49,34 +50,42 @@ addEventListener('load', async (e) => {
                 });
             }
         }
-        // else {
-            //     let div = document.createElement('div')
-            //     div.className = "blogbox rounded"
-            //     let para = document.createElement('p')
-            //     para.textContent = data[i].value
-            //     div.appendChild(para)
-            //     let form = document.createElement('form')
-            //     let comments = document.createElement('input')
-            //     comments.type = "text"
-            //     comments.placeholder = "Leave a comment"
-            //     comments.maxLength = "200"
-            //     comments.size = "50"
-            //     form.appendChild(comments)
-            //     let buttons =document.createElement('div')
-            //     buttons.className = "row"
-            //     let button1 = document.createElement('div')
-            //     button1.className = "col-sm-2"
-            //     let emoji1 = document.createElement('input')
-            //     emoji1.type = "button"
-            //     emoji1.value = "&#128077"
-            //     button1.appendChild(emoji1)
-            //     buttons.appendChild(button1)
-            //     form.appendChild(buttons)
-            //     div.appendChild(form)
-            //     container.appendChild(div)
-            
-            // }
+        else {
+            let card = document.createElement('div')
+            card.className = "card p-3 m-2"
+            let para = document.createElement('p')
+            para.textContent = data[i].value
+            card.appendChild(para)
+            let para2 = document.createElement('p')
+            para2.textContent = String.fromCodePoint(0x1F44D) + data[i].noLikes +  String.fromCodePoint(0x1F44E) + data[i].noDislikes +  String.fromCodePoint(0x1F923) + data[i].noEmojis
+            card.appendChild(para2)
+            let comHead = document.createElement('h6')
+            comHead.textContent = 'Comments:'
+            card.appendChild(comHead)
+            let ul = document.createElement('ul')
+            let comment = data[i].comments
+            if (comment !== []){
+                comment.forEach(item => {
+                    let li = document.createElement('li')
+                    li.textContent = item.comment
+                    ul.appendChild(li)
+                });
+            }
+            let giffys = data[i].gifs
+            if (giffys !== []){
+                giffys.forEach(item => {
+                    let img = document.createElement('img')
+                    img.className = 'gifImg'
+                    img.setAttribute('src', item)
+                    ul.appendChild(img)
+                });
+            }
+            card.appendChild(ul)
+
+            sidePanel.appendChild(card)
+
         }
+    }
 })
     
 share.addEventListener('click', async (e) => {
@@ -94,27 +103,31 @@ sendComment.addEventListener('click', async(e)=> {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json();
     let postId = data.find(post => postText.textContent === post.value).id;
-    if (commentBox.value){
-        let newId = data[postId-1].comments.length + 1;
-        posts[postId - 1].comments.push({id: newId, comment: commentBox.value});
-        const response = await fetch('http://localhost:8080/comment',
-        {
-            headers: {'Content-Type': 'application/json'},
-            method: "POST",
-            body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
-        });
-    }
-    else {
-        let url = gifImage.getAttribute('src')
-        posts[postId -1].gifs.push(url)
-        const response = await fetch('http://localhost:8080/gifs',
-        {
-            headers: {'Content-Type': 'application/json'},
-            method: "POST",
-            body: JSON.stringify({postId: postId, newGiffy: url})
-        });
-    }
+    let newId = data[postId-1].comments.length + 1;
+    posts[postId - 1].comments.push({id: newId, comment: commentBox.value});
+    const response = await fetch('http://localhost:8080/comment',
+    {
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
+    });
+    
 });
+const addGif = document.getElementById('addGif')
+addGif.addEventListener('click', async() => {
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    let url = gifImage.getAttribute('src')
+            posts[postId -1].gifs.push(url)
+            const response = await fetch('http://localhost:8080/gifs',
+            {
+                headers: {'Content-Type': 'application/json'},
+                method: "POST",
+                body: JSON.stringify({postId: postId, newGiffy: url})
+            });
+})
+
 
 thumbUp.addEventListener('click', async()=> {
     let resp = await fetch('http://localhost:8080/posts');
@@ -230,7 +243,6 @@ function charCount(e){
 
 function sendApiRequest() {
     let userInput = document.getElementById("gif").value
-    console.log(userInput)
 
     const giphyApiKey = "4qsIN2L7YbHr9wkQfLXylyEPXoG0Z6nZ"
     const giphyApiURL = `http://api.giphy.com/v1/gifs/search?q=${userInput}&rating=g&api_key=${giphyApiKey}`
