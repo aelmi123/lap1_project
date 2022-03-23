@@ -17,9 +17,9 @@
     {
       "id": 2,
       "value": "This is another post",
-      "noLikes": 3,
-      "noDislikes": 3,
-      "noEmojis": 5,
+      "noLikes": 4,
+      "noDislikes": 6,
+      "noEmojis": 6,
       "comments": [
         {
           "id": 1,
@@ -28,6 +28,10 @@
         {
           "id": 2,
           "comment": "yay"
+        },
+        {
+          "id": 3,
+          "comment": "skahlrgh"
         }
       ],
       "gifs": [
@@ -40,8 +44,8 @@
       "id": 3,
       "value": "This is a new post",
       "noLikes": 0,
-      "noDislikes": 0,
-      "noEmojis": -1,
+      "noDislikes": 1,
+      "noEmojis": 3,
       "comments": [],
       "gifs": []
     }

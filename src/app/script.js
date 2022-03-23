@@ -12,17 +12,48 @@ const sendComment = document.getElementById('sendComment');
 const commentBox = document.getElementById('commentsBox');
 const gifImage = document.getElementById("gifImage");
 const sidePanel = document.getElementById("sidePanel")
+const ul = document.getElementById('commentList')
+const container = document.getElementById('container')
+const characterCount = document.querySelector('#post-Box');
+const addGif = document.getElementById('addGif')
+const searchBar = document.getElementById('searchBar')
+const searchBtn = document.getElementById("searchBtn")
 
 const posts = [];
 
+
+characterCount.addEventListener('keyup', charCount)
+function charCount(e){
+    if(e.key){
+        document.querySelector('#current').textContent=document.querySelector('#post-Box').value.length
+
+    }
+}
+
+function sendApiRequest() {
+    let userInput = document.getElementById("gif").value
+
+    const giphyApiKey = "4qsIN2L7YbHr9wkQfLXylyEPXoG0Z6nZ"
+    const giphyApiURL = `http://api.giphy.com/v1/gifs/search?q=${userInput}&rating=g&api_key=${giphyApiKey}`
+
+    fetch(giphyApiURL).then(function(data) {
+        return data.json()
+    })
+    .then(function(json){
+        const index = Math.floor(Math.random() * json.data.length)
+        console.log(json.data[index].images.fixed_height.url)
+        let imgPath = json.data[index].images.fixed_height.url
+        let gifImage=document.querySelector("#gifImage")
+        gifImage.setAttribute("src", imgPath)
+    })
+}
 
 // Load Posts
 addEventListener('load', async (e) => {
     const postsJson = await fetch('http://localhost:8080/posts');
     posts.push(...await postsJson.json());
 })
-const ul = document.getElementById('commentList')
-const container = document.getElementById('container')
+
 addEventListener('load', async (e) => {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json()
@@ -99,6 +130,35 @@ share.addEventListener('click', async (e) => {
         });
 })
  
+searchBtn.addEventListener('click', async(e) => {
+    e.preventDefault()
+    let userInput = searchBar.value
+    let resp = await fetch('http://localhost:8080/posts');
+    let data = await resp.json();
+    let schres = data.find(post => post.value.includes(userInput)).id
+    let post = data[schres -1].value
+    postText.textContent = post
+    let comment = data[schres -1].comments
+    if (comment !== []){
+        comment.forEach(item => {
+            let li = document.createElement('li')
+            li.textContent = item.comment
+            ul.appendChild(li)
+        });
+    }
+    numLaughFace.textContent = data[schres -1].noEmojis
+    numThumbUp.textContent = data[schres -1].noLikes
+    numThumbDown.textContent = data[schres -1].noDislikes
+    let giffys = data[schres -1].gifs
+    if (giffys !== []){
+        giffys.forEach(item => {
+            let img = document.createElement('img')
+            img.setAttribute('src', item)
+            ul.appendChild(img)
+        });
+    }
+})
+
 sendComment.addEventListener('click', async(e)=> {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json();
@@ -113,7 +173,7 @@ sendComment.addEventListener('click', async(e)=> {
     });
     
 });
-const addGif = document.getElementById('addGif')
+
 addGif.addEventListener('click', async() => {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json();
@@ -232,33 +292,5 @@ laughFace.addEventListener('mouseleave', async(e)=> {
     });
 });
 
-const characterCount = document.querySelector('#post-Box');
-characterCount.addEventListener('keyup', charCount)
-function charCount(e){
-    if(e.key){
-        document.querySelector('#current').textContent=document.querySelector('#post-Box').value.length
-
-    }
-}
-
-function sendApiRequest() {
-    let userInput = document.getElementById("gif").value
-
-    const giphyApiKey = "4qsIN2L7YbHr9wkQfLXylyEPXoG0Z6nZ"
-    const giphyApiURL = `http://api.giphy.com/v1/gifs/search?q=${userInput}&rating=g&api_key=${giphyApiKey}`
-
-    fetch(giphyApiURL).then(function(data) {
-        return data.json()
-    })
-    .then(function(json){
-        const index = Math.floor(Math.random() * json.data.length)
-        console.log(json.data[index].images.fixed_height.url)
-        let imgPath = json.data[index].images.fixed_height.url
-        let gifImage=document.querySelector("#gifImage")
-        // let img = document.createElement("img")
-        gifImage.setAttribute("src", imgPath)
-        // document.body.appendChild(img)
-    })
-}
 
 
