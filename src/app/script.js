@@ -8,55 +8,57 @@ const laughFace = document.getElementById('laughFace');
 const numLaughFace = document.getElementById('countLaughFace');
 const thumbDown = document.getElementById('thumbsDown');
 const numThumbDown = document.getElementById('countThumbDown');
+const sendComment = document.getElementById('sendComment');
+const commentBox = document.getElementById('commentsBox');
 
 const posts = [];
 
-let countLaughFace = 0
-let countThumbDown = 0
-let countThumbUp = 0
+// let countLaughFace = 0
+// let countThumbDown = 0
+// let countThumbUp = 0
 
-// get postText input field and update value
-thumbUp.addEventListener('click', clickUp);
+// // get postText input field and update value
+// thumbUp.addEventListener('click', clickUp);
 
-var clickCountUp=0;
-function clickUp(event){
-    clickCountUp ++;
-    if(clickCountUp % 2 != 0){
-        countThumbUp ++;
-    }
-    else {
-        countThumbUp --;
-     }  numThumbUp.textContent = countThumbUp;
-}
-
-
-
-thumbDown.addEventListener('click', clickDown);
-
-var clickCountDown=0;
-function clickDown(event){
-    clickCountDown ++;
-    if(clickCountDown % 2 != 0){
-        countThumbDown ++;
-    }
-    else {
-        countThumbDown --;
-     }  numThumbDown.textContent = countThumbDown;
-}
+// var clickCountUp=0;
+// function clickUp(event){
+//     clickCountUp ++;
+//     if(clickCountUp % 2 != 0){
+//         countThumbUp ++;
+//     }
+//     else {
+//         countThumbUp --;
+//      }  numThumbUp.textContent = countThumbUp;
+// }
 
 
-laughFace.addEventListener('click', clickLaugh);
 
-var clickCountLaugh=0;
-function clickLaugh(event){
-    clickCountLaugh ++;
-    if(clickCountLaugh % 2 != 0){
-        countLaughFace ++;
-    }
-    else {
-        countLaughFace --;
-     }  numLaughFace.textContent = countLaughFace;
-}
+// thumbDown.addEventListener('click', clickDown);
+
+// var clickCountDown=0;
+// function clickDown(event){
+//     clickCountDown ++;
+//     if(clickCountDown % 2 != 0){
+//         countThumbDown ++;
+//     }
+//     else {
+//         countThumbDown --;
+//      }  numThumbDown.textContent = countThumbDown;
+// }
+
+
+// laughFace.addEventListener('click', clickLaugh);
+
+// var clickCountLaugh=0;
+// function clickLaugh(event){
+//     clickCountLaugh ++;
+//     if(clickCountLaugh % 2 != 0){
+//         countLaughFace ++;
+//     }
+//     else {
+//         countLaughFace --;
+//      }  numLaughFace.textContent = countLaughFace;
+// }
 
 
 
@@ -121,28 +123,21 @@ addEventListener('load', async (e) => {
         }
 })
     
-const sendComment = document.getElementById('sendComment')
-const commentBox = document.getElementById('commentsBox')
+
     
 sendComment.addEventListener('click', async(e)=> {
-    
     let resp = await fetch('http://localhost:8080/posts');
-    let data = await resp.json()
-    for (i = 0; i < data.length; i++) {
-        if (postText.textContent === data[i].value){
-            let postId = data[i].id
-            let newId = data[i].comments.length +1
-            posts[i].comments.push({id: newId, comment: commentBox})
-            const response = await fetch('http://localhost:8080/comment',
-            {
-                headers: {'Content-Type': 'application/json'},
-                method: "POST",
-                body: JSON.stringify({ postId: postId, id: newId, comment: commentBox})
-            });
-        }
-    }
-       
-})
+    let data = await resp.json();
+    let postId = data.find(post => postText.textContent === post.value).id;
+    let newId = data[postId-1].comments.length + 1;
+    posts[postId - 1].comments.push({id: newId, comment: commentBox.value});
+    const response = await fetch('http://localhost:8080/comment',
+    {
+        headers: {'Content-Type': 'application/json'},
+        method: "POST",
+        body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
+    });
+});
     
 share.addEventListener('click', async (e) => {
     const newId = posts.length + 1;
