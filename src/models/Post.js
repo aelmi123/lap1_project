@@ -5,14 +5,16 @@ class Post {
     noDislikes;
     noEmojis;
     comments;
+    gifs;
 
-    constructor(id, value, noLikes = 0, noDislikes = 0, noEmojis = 0, comments = []) {
+    constructor(id, value, noLikes = 0, noDislikes = 0, noEmojis = 0, comments = [], gifs =[]) {
         this.id = id;
         this.value = value;
         this.noLikes = noLikes;
         this.noDislikes = noDislikes;
         this.noEmojis = noEmojis;
         this.comments = comments;
+        this.gifs = gifs;
     }
 
     get Id() {
@@ -55,6 +57,12 @@ class Post {
     }
     set comments(value) {
         this.comments = value
+    }
+    get Gifs() {
+        return this.gifs;
+    }
+    set gifs(value) {
+        this.gifs = value
     }
 }
 

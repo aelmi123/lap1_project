@@ -10,6 +10,7 @@ const thumbDown = document.getElementById('thumbsDown');
 const numThumbDown = document.getElementById('countThumbDown');
 const sendComment = document.getElementById('sendComment');
 const commentBox = document.getElementById('commentsBox');
+const gifImage = document.getElementById("gifImage")
 
 const posts = [];
 
@@ -39,6 +40,14 @@ addEventListener('load', async (e) => {
             numLaughFace.textContent = data[i].noEmojis
             numThumbUp.textContent = data[i].noLikes
             numThumbDown.textContent = data[i].noDislikes
+            let giffys = data[i].gifs
+            if (giffys !== []){
+                giffys.forEach(item => {
+                    let img = document.createElement('img')
+                    img.setAttribute('src', item)
+                    ul.appendChild(img)
+                });
+            }
         }
         // else {
             //     let div = document.createElement('div')
@@ -53,10 +62,6 @@ addEventListener('load', async (e) => {
             //     comments.maxLength = "200"
             //     comments.size = "50"
             //     form.appendChild(comments)
-            //     let giffy = document.createElement('input')
-            //     giffy.type ="button"
-            //     giffy.value = "GIF"
-            //     form.append(giffy)
             //     let buttons =document.createElement('div')
             //     buttons.className = "row"
             //     let button1 = document.createElement('div')
@@ -74,20 +79,41 @@ addEventListener('load', async (e) => {
         }
 })
     
-
-    
+share.addEventListener('click', async (e) => {
+    const newId = posts.length + 1;
+    posts.push({ id: newId, value: postBox.value })
+    const response = await fetch('http://localhost:8080/post',
+        {
+            headers: {'Content-Type': 'application/json'},
+            method: "POST",
+            body: JSON.stringify({ id: newId, value: postBox.value})
+        });
+})
+ 
 sendComment.addEventListener('click', async(e)=> {
     let resp = await fetch('http://localhost:8080/posts');
     let data = await resp.json();
     let postId = data.find(post => postText.textContent === post.value).id;
-    let newId = data[postId-1].comments.length + 1;
-    posts[postId - 1].comments.push({id: newId, comment: commentBox.value});
-    const response = await fetch('http://localhost:8080/comment',
-    {
-        headers: {'Content-Type': 'application/json'},
-        method: "POST",
-        body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
-    });
+    if (commentBox.value){
+        let newId = data[postId-1].comments.length + 1;
+        posts[postId - 1].comments.push({id: newId, comment: commentBox.value});
+        const response = await fetch('http://localhost:8080/comment',
+        {
+            headers: {'Content-Type': 'application/json'},
+            method: "POST",
+            body: JSON.stringify({ postId: postId, id: newId, comment: commentBox.value})
+        });
+    }
+    else {
+        let url = gifImage.getAttribute('src')
+        posts[postId -1].gifs.push(url)
+        const response = await fetch('http://localhost:8080/gifs',
+        {
+            headers: {'Content-Type': 'application/json'},
+            method: "POST",
+            body: JSON.stringify({postId: postId, newGiffy: url})
+        });
+    }
 });
 
 thumbUp.addEventListener('click', async()=> {
@@ -193,17 +219,6 @@ laughFace.addEventListener('mouseleave', async(e)=> {
     });
 });
 
-share.addEventListener('click', async (e) => {
-    const newId = posts.length + 1;
-    posts.push({ id: newId, value: postBox.value })
-    const response = await fetch('http://localhost:8080/post',
-        {
-            headers: {'Content-Type': 'application/json'},
-            method: "POST",
-            body: JSON.stringify({ id: newId, value: postBox.value})
-        });
-})
- 
 const characterCount = document.querySelector('#post-Box');
 characterCount.addEventListener('keyup', charCount)
 function charCount(e){
@@ -234,4 +249,4 @@ function sendApiRequest() {
     })
 }
 
- 
+

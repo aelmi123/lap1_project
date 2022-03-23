@@ -35,33 +35,33 @@
                 <div  class="blogbox rounded">
                     <h4>Latest Post</h4>
                     <p id="postText"></p>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <input type="button" id="thumbsUp" value="&#128077">
+                        </div>
+                        <div class="col-sm-1">
+                            <p id="countThumbUp"></p>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="button" id="thumbsDown" value="&#128078">
+                        </div>
+                        <div class="col-sm-1">
+                            <p id="countThumbDown"></p> 
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="button" id="laughFace" value="&#129315">
+                        </div>
+                        <div class="col-sm-1">
+                            <p id="countLaughFace"></p>
+                        </div>
+                    </div>
 
                     <h6>Comments:</h6>
                     <ul id="commentList"></ul>
                     <form >
                         <input type="text" id="commentsBox" placeholder="Leave a comment" maxlength="200" style="height: 50px;" size="50">
                         <input type="submit" id="sendComment" value="Comment">
-                        <div id="commentForm" class="row">
-                            <div class="col-sm-1">
-                                <input type="button" id="thumbsUp" value="&#128077">
-                            </div>
-                            <div class="col-sm-1">
-                                <p id="countThumbUp"></p>
-                            </div>
-                            
-                            <div class="col-sm-1">
-                                <input type="button" id="thumbsDown" value="&#128078">
-                            </div>
-                            <div class="col-sm-1">
-                                <p id="countThumbDown"></p> 
-                            </div>
-                            <div class="col-sm-1">
-                                <input type="button" id="laughFace" value="&#129315">
-                            </div>
-                            <div class="col-sm-1">
-                                <p id="countLaughFace"></p>
-                            </div>
-                    </div>
+                        
                     </form>
                     <img id="gifImage" alt="">
                     <input type="text" id="gif">

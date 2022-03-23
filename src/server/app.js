@@ -87,6 +87,28 @@ app.post('/emoji', async (req, res) => {
 
 })
 
+app.post('/gifs', async (req, res) => {
+    const newGif = req.body;
+    fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+            const postsData = JSON.parse(data)
+            postsData.posts[newGif.postId -1].gifs.push(newGif.newGiffy)
+            fs.writeFile('./src/server/posts.json', JSON.stringify(postsData, null, 2), err => {
+                if (err){
+                    console.log(err)
+                }
+                else {
+                    console.log('success')
+                }
+
+            })
+        }
+    })
+})
+
 app.get('/posts', (req,res)=> {
     fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
         if(err) {

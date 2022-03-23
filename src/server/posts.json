@@ -11,14 +11,15 @@
           "id": 1,
           "comment": "This is cool"
         }
-      ]
+      ],
+      "gifs": []
     },
     {
       "id": 2,
       "value": "This is another post",
-      "noLikes": 2,
+      "noLikes": 3,
       "noDislikes": 3,
-      "noEmojis": 3,
+      "noEmojis": 5,
       "comments": [
         {
           "id": 1,
@@ -27,7 +28,14 @@
         {
           "id": 2,
           "comment": "yay"
+        },
+        {
+          "id": 3,
+          "comment": "help"
         }
+      ],
+      "gifs": [
+        "https://media1.giphy.com/media/10UeedrT5MIfPG/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g"
       ]
     }
   ]
