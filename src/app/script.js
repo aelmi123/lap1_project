@@ -139,7 +139,6 @@ sendComment.addEventListener('click', async(e)=> {
                 method: "POST",
                 body: JSON.stringify({ postId: postId, id: newId, comment: commentBox})
             });
-            console.log(response)
         }
     }
        
