@@ -2,11 +2,11 @@
   "name": "lap1_project",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/server/app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/server/app.js",
     "test": "jest --watchAll",
-    "dev": "nodemon app.js"
+    "dev": "nodemon src/server/app.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.2"
   }
 }
