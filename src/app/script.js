@@ -252,8 +252,6 @@ function clickUp(countThumbUp){
      }  numThumbUp.textContent = countThumbUp;
 }
 
-let countLaughFace = 0
-
 thumbDown.addEventListener('click', async()=> {
     try {
         let resp = await fetch('http://localhost:8080/posts');

@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 // after server has been declared
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 8080
+// const port = process.PORT || 8090
+const port = 8080
 
 app.use(cors())
 
@@ -128,7 +129,6 @@ app.post('/gifs', async (req, res) => {
         }
     })
 })
-
 app.get('/posts', (req,res)=> {
     fs.readFile('./src/server/posts.json', 'utf-8', (err, data) => {
         if(err) {
@@ -149,3 +149,4 @@ app.get('/posts', (req,res)=> {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })
+

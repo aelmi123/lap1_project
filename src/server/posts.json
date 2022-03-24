@@ -2,43 +2,43 @@
   "posts": [
     {
       "id": 1,
-      "value": "This is a post.",
-      "noLikes": 0,
-      "noDislikes": 0,
-      "noEmojis": 1,
+      "value": "I was at an art class recently and we were discussing the golden ratios. The art teacher proceed to tell us that she often meets adults who say that they can't draw. The real time phase from a child moves from stick figures to drawing from observation is between 8 to 12 years. And it's not always natural. We have to unlearn how we observe and realize that it's difficult for everyone. Once we cross that hurdle mentally, we know that we're there. And we can do it. I feel stories are the same way. Sometimes what we believe to be our most uninteresting bits actually inspire emotion. We have to believe that we can.",
+      "noLikes": 7,
+      "noDislikes": 2,
+      "noEmojis": 4,
       "comments": [
         {
           "id": 1,
-          "comment": "This is cool"
+          "comment": "I love art"
         }
       ],
       "gifs": []
     },
     {
       "id": 2,
-      "value": "This is another post",
+      "value": "When people are looking for their meaning in life, they will have trouble finding it if they make erroneous assumptions about how life works or what they’re supposed to do with the one that they’ve been given.  Unfortunately, such fundamental assumptions are held sometimes without people having thought about them critically or even realizing that they’re there.  If they aren’t identified and corrected, there is a high risk of having regrets in life and/or missing out on a lot of satisfaction and fulfillment over the years.",
       "noLikes": 4,
       "noDislikes": 6,
       "noEmojis": 6,
       "comments": [
         {
           "id": 1,
-          "comment": "This is cool"
+          "comment": "Absolutely agree could'nt have written it better myself!!"
         },
         {
           "id": 2,
-          "comment": "yay"
+          "comment": "Hallelujah, praise the lord!"
         }
       ],
       "gifs": [
         "https://media1.giphy.com/media/10UeedrT5MIfPG/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g",
-        "https://media4.giphy.com/media/J3kNxYOj8mb7O/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g",
-        "https://media3.giphy.com/media/xhvv985KTwsrm/200.gif?cid=74aacfda7pp8nqvwjvc0c6naeg5fw93c1z2qpk3iriqzsej3&rid=200.gif&ct=g"
+        "https://media3.giphy.com/media/xhvv985KTwsrm/200.gif?cid=74aacfda7pp8nqvwjvc0c6naeg5fw93c1z2qpk3iriqzsej3&rid=200.gif&ct=g",
+        "https://media4.giphy.com/media/J3kNxYOj8mb7O/200.gif?cid=74aacfdagnq2m85ncksodxz91u0464fmturthtj8bzn6zxut&rid=200.gif&ct=g"
       ]
     },
     {
       "id": 3,
-      "value": "This is a new post",
+      "value": "A cat might sit up in a tree, And be as guiltless as could be, But if a nest were near, I know I should hardly think him so. Once there was a little kitty, White as the snow; In a barn he used to frolic, Long time ago.",
       "noLikes": 0,
       "noDislikes": 0,
       "noEmojis": 0,
