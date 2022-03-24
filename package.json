@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/server/app.js",
   "scripts": {
-    "start": "node src/server/app.js",
+    "start": "node server/app.js",
     "test": "jest --watchAll",
-    "start-dev": "nodemon src/server/app.js"
+    "start-dev": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
