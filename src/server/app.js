@@ -1,10 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-// in server.js
-const bodyParser = require('body-parser');
-// after server has been declared
-app.use(bodyParser.json());
+// // in server.js
+// const bodyParser = require('body-parser');
+// // after server has been declared
+// app.use(bodyParser.json());
 
 const port = process.env.PORT || 8080
 
