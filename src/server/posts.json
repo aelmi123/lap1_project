@@ -48,46 +48,6 @@
       "noEmojis": 0,
       "comments": [],
       "gifs": []
-    },
-    {
-      "id": 4,
-      "value": "hey guys",
-      "noLikes": 0,
-      "noDislikes": 0,
-      "noEmojis": 0,
-      "comments": [
-        {
-          "id": 1,
-          "comment": "wow"
-        }
-      ],
-      "gifs": []
-    },
-    {
-      "id": 5,
-      "value": "well done",
-      "noLikes": 0,
-      "noDislikes": 1,
-      "noEmojis": 1,
-      "comments": [],
-      "gifs": [
-        null,
-        "https://media3.giphy.com/media/9HFswaPUcWJj1bK1dQ/200.gif?cid=74aacfdaw5igybilp9yxmmdp01aldgrwr9tstbclf4uka9rx&rid=200.gif&ct=g"
-      ]
-    },
-    {
-      "id": 6,
-      "value": "testing",
-      "noLikes": 2,
-      "noDislikes": 2,
-      "noEmojis": 2,
-      "comments": [],
-      "gifs": [
-        "https://media2.giphy.com/media/mFwlk5Fg6znWWhBDji/200.gif?cid=74aacfdalzm2txoisd5v4tylypu3sxom7x2kw68zqww3654e&rid=200.gif&ct=g",
-        "https://media2.giphy.com/media/mFwlk5Fg6znWWhBDji/200.gif?cid=74aacfdalzm2txoisd5v4tylypu3sxom7x2kw68zqww3654e&rid=200.gif&ct=g",
-        "https://media2.giphy.com/media/mFwlk5Fg6znWWhBDji/200.gif?cid=74aacfdalzm2txoisd5v4tylypu3sxom7x2kw68zqww3654e&rid=200.gif&ct=g",
-        "https://media2.giphy.com/media/mFwlk5Fg6znWWhBDji/200.gif?cid=74aacfdalzm2txoisd5v4tylypu3sxom7x2kw68zqww3654e&rid=200.gif&ct=g"
-      ]
     }
   ]
 }
