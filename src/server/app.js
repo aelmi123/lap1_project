@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // after server has been declared
 app.use(bodyParser.json());
 
-const port = 8080
+const port = process.env.PORT || 8080
 
 app.use(cors())
 
