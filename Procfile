@@ -1,3 +1,3 @@
-web: npm run start-dev
+web: npm start
 
 
